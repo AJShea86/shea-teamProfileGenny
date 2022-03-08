@@ -15,8 +15,8 @@ function generateHTML(data) {
   
   
   ## Manager info
+  <h1>  ${data.managerName}  </h1>
     
-  ${data.managerName} 
   ${data.managerID}
   ${data.managerEmail}
   ${data.managerNumber}
