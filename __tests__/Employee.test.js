@@ -7,7 +7,7 @@ test("can create an employee instance", () => {
 })
 
 test("is name entered", () => {
-    const testEmp = new Employee(name)
     const name = "AJ"
+    const testEmp = new Employee(name)
     expect(testEmp.name).toBe(name)
 })
