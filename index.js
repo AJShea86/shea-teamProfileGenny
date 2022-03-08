@@ -1,5 +1,3 @@
-//step one: ask user questions
-//step two: log out data
 
 const Employee = require("./lib/Employee");
 const Manager = require("./lib/Manager");
