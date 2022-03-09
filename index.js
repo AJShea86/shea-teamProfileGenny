@@ -21,7 +21,8 @@ const testData = {
   internEmail: 'mac@intern.com',
   internSchool: 'University of Denver'
 }
-const team = {manager:null, engineer:null, intern:null}
+const team = {manager:null, engineer:null, intern:null, extraMembers:[]}
+
 
 
 let userAnswers = {};
@@ -173,6 +174,7 @@ console.log(userAnswers)
   
       }
   
+      
 
 
       const finalResult = generateHTML(team);
@@ -189,23 +191,48 @@ console.log(userAnswers)
 
   });
 
+function askExtra(question){
+  let questions = [];
+  inquirer
+  .prompt(extraQuestion)
+  .then((extraAnswer) => {
+    if(extraAnswer.includes("Add Engineer") && extraAnswer.includes("Add Intern")){
+      questions = [...engineerQuestions, ...internQuestions]
+    } else if (extraAnswer.includes("Add Engineer")){
+      questions = [...engineerQuestions]
+    } else if (extraAnswer.includes("Add Intern")){
+      questions = [...internQuestions]
+  
+    } else {
+  
+    }
+  return questions
+  })
 
 
-  ////need extra question to be the final question asked to the user
-// inquirer
-// .prompt(extraQuestion)
-// .then((extraAnswer) => {
-//   if(extraAnswer.includes("Add Engineer") && extraAnswer.includes("Add Intern")){
-//     questions = [...engineerQuestions, ...internQuestions]
-//   } else if (extraAnswer.includes("Add Engineer")){
-//     questions = [...engineerQuestions]
-//   } else if (extraAnswer.includes("Add Intern")){
-//     questions = [...internQuestions]
+}
 
-//   } else {
-// // then need a function to create as many employees as needed?
-// // make the extraquestion a function itself?
+function askTeamQuestion(questions){
+  inquirer
+  .prompt(questions)
+  .then((data2) => {
 
-//   }
+    if(data2.engineerName && data2.internName){
+      const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
+      team.extraMembers.push(engineer)
 
-// })
+      const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
+      team.extraMembers.push(intern)
+
+    } else if (data2.engineerName){
+      const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
+      team.extraMembers.push(engineer)
+
+    } else if (data2.internName){
+      const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
+      team.extraMembers.push(intern) 
+    } else {
+
+    }
+  })
+}
