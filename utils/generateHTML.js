@@ -54,9 +54,9 @@ function generateHTML(team) {
   <body>
     <div class="allCards">
 ${team.manager.generateHTMLCard(team.manager.getOfficeNumber())}
-${team.engineer.generateHTMLCard(team.engineer.getGithub())}
-${team.intern.generateHTMLCard(team.intern.getSchool())}
-
+${team.engineer !== null ? team.engineer.generateHTMLCard(team.engineer.getGithub()): ""}
+${team.intern !== null ? team.intern.generateHTMLCard(team.intern.getSchool()): ""}
+${team.extraMembers.map(member => member.generateHTMLCard("hello"))}
 
     </body>
 </html>

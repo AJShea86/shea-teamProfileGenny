@@ -46,7 +46,7 @@ const baseQuestions = [    {
 {
   type: "input",
   message: "What is the manager's office number?",
-  name: "managerNumber",
+  name: "officeNumber",
 },
 {
   type: "checkbox",
@@ -132,6 +132,7 @@ inquirer
 
   .then((data) => {
     userAnswers = data
+    console.log(data)
     const manager = new Manager(data.managerName, data.managerID, data.managerEmail, data.officeNumber)
     team.manager = manager
 
@@ -177,13 +178,13 @@ console.log(userAnswers)
       
 
 
-      const finalResult = generateHTML(team);
+      // const finalResult = generateHTML(team);
 
-      fs.writeFile("index.html", finalResult, (err) =>
-        err ? console.error(err) : console.log("Success!")
-      );
+      // fs.writeFile("index.html", finalResult, (err) =>
+      //   err ? console.error(err) : console.log("Success!")
+      // );
   
-
+        askExtra(extraQuestion);
 
 
     })
@@ -191,48 +192,67 @@ console.log(userAnswers)
 
   });
 
-function askExtra(question){
-  let questions = [];
-  inquirer
-  .prompt(extraQuestion)
-  .then((extraAnswer) => {
-    if(extraAnswer.includes("Add Engineer") && extraAnswer.includes("Add Intern")){
-      questions = [...engineerQuestions, ...internQuestions]
-    } else if (extraAnswer.includes("Add Engineer")){
-      questions = [...engineerQuestions]
-    } else if (extraAnswer.includes("Add Intern")){
-      questions = [...internQuestions]
+  function askExtra(extraQuestion){
+    let questions = [];
+    inquirer
+    .prompt(extraQuestion)
+    .then((extraAnswer) => {
+      console.log(extraAnswer)
+      if(extraAnswer.addMember.includes("Add Engineer") && extraAnswer.addMember.includes("Add Intern")){
+        questions = [...engineerQuestions, ...internQuestions]
+      } else if (extraAnswer.addMember.includes("Add Engineer")){
+        questions = [...engineerQuestions]
+      } else if (extraAnswer.addMember.includes("Add Intern")){
+        questions = [...internQuestions]
+    
+      } else {
+        const finalResult = generateHTML(team);
+
+        return fs.writeFile("index.html", finalResult, (err) =>
+          err ? console.error(err) : console.log("Success!")
+        );
+      }
+      console.log(team)
+
+    askTeamQuestion(questions)
+    })
   
-    } else {
   
-    }
-  return questions
-  })
+  }
+  
+  function askTeamQuestion(questions){
+    inquirer
+    .prompt(questions)
+    .then((data2) => {
+  
+      if(data2.engineerName && data2.internName){
+        const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
+        team.extraMembers.push(engineer)
+  
+        const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
+        team.extraMembers.push(intern)
+        
+        askExtra(extraQuestion)
+  
+      } else if (data2.engineerName){
+        const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
+        team.extraMembers.push(engineer)
+        
+        askExtra(extraQuestion)
+  
+      } else if (data2.internName){
+        const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
+        team.extraMembers.push(intern)
 
+        askExtra(extraQuestion)
 
-}
+      } else {
+          console.log(team)
+        const finalResult = generateHTML(team);
 
-function askTeamQuestion(questions){
-  inquirer
-  .prompt(questions)
-  .then((data2) => {
-
-    if(data2.engineerName && data2.internName){
-      const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
-      team.extraMembers.push(engineer)
-
-      const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
-      team.extraMembers.push(intern)
-
-    } else if (data2.engineerName){
-      const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
-      team.extraMembers.push(engineer)
-
-    } else if (data2.internName){
-      const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
-      team.extraMembers.push(intern) 
-    } else {
-
-    }
-  })
-}
+        fs.writeFile("index.html", finalResult, (err) =>
+          err ? console.error(err) : console.log("Success!")
+        );
+      }
+    })
+  }
