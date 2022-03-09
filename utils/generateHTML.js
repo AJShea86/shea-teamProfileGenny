@@ -71,7 +71,7 @@ function generateHTML(data) {
         </div>
         <ul class="list-group list-group-flush teamCards" style="color: black">
           <li class="list-group-item" style="width: 225px">Employee ID: ${data.managerID}</li>
-          <li class="list-group-item" style="width: 225px">Email: <[data.managerEmail](mailto:${data.managerEmail}></li>
+          <li class="list-group-item" style="width: 225px">Email: <a href="mailto:${data.managerEmail}">${data.managerEmail}</a></li>
           <li class="list-group-item" style="width: 225px">Office Number: ${data.managerNumber}</li>
         </ul>
       </div>
@@ -97,7 +97,7 @@ function generateHTML(data) {
         <ul class="list-group list-group-flush teamCards" style="color: black">
           <li class="list-group-item" style="width: 225px">Employee ID: ${data.engineerID}</li>
           <li class="list-group-item" style="width: 225px">Email: ${data.engineerEmail}</li>
-          <li class="list-group-item" style="width: 225px">Github: ${data.engineerGithub}</li>
+          <li class="list-group-item" style="width: 225px">Github: <a href="https://github.com/${data.engineerGithub}">${data.engineerGithub}</a></li>
         </ul>
       </div>
       <div
@@ -125,7 +125,8 @@ function generateHTML(data) {
         </ul>
       </div>
     </div>
-  </body>
+
+    </body>
 </html>
 
 

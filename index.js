@@ -23,6 +23,7 @@ const testData = {
 }
 
 let userAnswers = {};
+let userAnswers2 = {};//ADDED USERANSWERS 2 HERE
 const baseQuestions = [    {
 
   type: "input",
@@ -73,6 +74,13 @@ const engineerQuestions = [    {
   message: "What is the engineer's Github username?",
   name: "engineerGithub",
 },
+// {
+//   type: "checkbox",
+//   message: "Would you like to add more team members?",
+//   choices: ["Add Engineer", "Add Intern", "Finish building team"],
+//   name: "addMember",
+// },
+
 
 ]
 
@@ -96,6 +104,13 @@ const internQuestions = [    {
   message: "Where does the intern attend school?",
   name: "internSchool",
 },   
+// {
+//   type: "checkbox",
+//   message: "Would you like to add more team members?",
+//   choices: ["Add Engineer", "Add Intern", "Finish building team"],
+//   name: "addMember",
+// },
+
 ]
 //ADDED THE EXTRA QUESTION TO MAKE SURE THEY DO NOT WANT TO ADD MORE MEMBERS
 const extraQuestion = [
@@ -118,11 +133,11 @@ console.log(userAnswers)
     let questions = [];
 
     if(data.addMember.includes("Add Engineer") && data.addMember.includes("Add Intern")){
-      questions = [...engineerQuestions, ...internQuestions]//ADDED THE EXTRA QUESTION HERE
+      questions = [...engineerQuestions, ...internQuestions]
     } else if (data.addMember.includes("Add Engineer")){
-      questions = [...engineerQuestions]//ADDED THE EXTRA QUESTION HERE
+      questions = [...engineerQuestions]
     } else if (data.addMember.includes("Add Intern")){
-      questions = [...internQuestions]//ADDED THE EXTRA QUESTION HERE
+      questions = [...internQuestions]
 
     } else {
 
@@ -131,8 +146,10 @@ console.log(userAnswers)
 
     inquirer
     .prompt(questions)
-    
-    .then(data2 => {
+    .then((data2) => {
+
+
+
       userAnswers = {...userAnswers, ...data2}
       console.log(userAnswers)
       const finalResult = generateHTML(userAnswers);
@@ -142,8 +159,31 @@ console.log(userAnswers)
       );
   
 
+
+
     })
 
 
   });
 
+
+
+
+  ////need extra question to be the final question asked to the user
+// inquirer
+// .prompt(extraQuestion)
+// .then((extraAnswer) => {
+//   if(extraAnswer.includes("Add Engineer") && extraAnswer.includes("Add Intern")){
+//     questions = [...engineerQuestions, ...internQuestions]
+//   } else if (extraAnswer.includes("Add Engineer")){
+//     questions = [...engineerQuestions]
+//   } else if (extraAnswer.includes("Add Intern")){
+//     questions = [...internQuestions]
+
+//   } else {
+// then need a function to create as many employees as needed?
+// make the extraquestion a function itself?
+//
+//   }
+
+// })
