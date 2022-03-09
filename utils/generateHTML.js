@@ -70,9 +70,9 @@ function generateHTML(data) {
           <p class="card-text">Manager</p>
         </div>
         <ul class="list-group list-group-flush teamCards" style="color: black">
-          <li class="list-group-item">${data.managerID}</li>
-          <li class="list-group-item">${data.managerEmail}</li>
-          <li class="list-group-item">${data.managerNumber}</li>
+          <li class="list-group-item" style="width: 225px">Employee ID: ${data.managerID}</li>
+          <li class="list-group-item" style="width: 225px">Email: <[data.managerEmail](mailto:${data.managerEmail}></li>
+          <li class="list-group-item" style="width: 225px">Office Number: ${data.managerNumber}</li>
         </ul>
       </div>
 
@@ -95,9 +95,9 @@ function generateHTML(data) {
           <p class="card-text">Engineer</p>
         </div>
         <ul class="list-group list-group-flush teamCards" style="color: black">
-          <li class="list-group-item">${data.engineerID}</li>
-          <li class="list-group-item">${data.engineerEmail}</li>
-          <li class="list-group-item">"https://github.com/${data.engineerGithub}"</li>
+          <li class="list-group-item" style="width: 225px">Employee ID: ${data.engineerID}</li>
+          <li class="list-group-item" style="width: 225px">Email: ${data.engineerEmail}</li>
+          <li class="list-group-item" style="width: 225px">Github: ${data.engineerGithub}</li>
         </ul>
       </div>
       <div
@@ -119,9 +119,9 @@ function generateHTML(data) {
           <p class="card-text">Intern</p>
         </div>
         <ul class="list-group list-group-flush teamCards" style="color: black">
-          <li class="list-group-item">${data.internID}</li>
-          <li class="list-group-item">${data.internEmail}</li>
-          <li class="list-group-item">${data.internSchool}</li>
+          <li class="list-group-item" style="width: 225px">Employee ID: ${data.internID}</li>
+          <li class="list-group-item" style="width: 225px">Email: ${data.internEmail}</li>
+          <li class="list-group-item" style="width: 225px">School: ${data.internSchool}</li>
         </ul>
       </div>
     </div>

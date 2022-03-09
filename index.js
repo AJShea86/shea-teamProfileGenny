@@ -73,6 +73,7 @@ const engineerQuestions = [    {
   message: "What is the engineer's Github username?",
   name: "engineerGithub",
 },
+
 ]
 
 const internQuestions = [    {
@@ -94,8 +95,20 @@ const internQuestions = [    {
   type: "input",
   message: "Where does the intern attend school?",
   name: "internSchool",
-},    
+},   
 ]
+//ADDED THE EXTRA QUESTION TO MAKE SURE THEY DO NOT WANT TO ADD MORE MEMBERS
+const extraQuestion = [
+  {
+    type: "checkbox",
+    message: "Would you like to add more team members?",
+    choices: ["Add Engineer", "Add Intern", "Finish building team"],
+    name: "addMember",
+  },
+  
+]
+
+
 inquirer
   .prompt(baseQuestions)
 
@@ -105,11 +118,11 @@ console.log(userAnswers)
     let questions = [];
 
     if(data.addMember.includes("Add Engineer") && data.addMember.includes("Add Intern")){
-      questions = [...engineerQuestions, ...internQuestions]
+      questions = [...engineerQuestions, ...internQuestions]//ADDED THE EXTRA QUESTION HERE
     } else if (data.addMember.includes("Add Engineer")){
-      questions = engineerQuestions
+      questions = [...engineerQuestions]//ADDED THE EXTRA QUESTION HERE
     } else if (data.addMember.includes("Add Intern")){
-      questions = internQuestions
+      questions = [...internQuestions]//ADDED THE EXTRA QUESTION HERE
 
     } else {
 
@@ -130,7 +143,6 @@ console.log(userAnswers)
   
 
     })
-    console.log("hello");
 
 
   });
