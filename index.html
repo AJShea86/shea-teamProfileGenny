@@ -1,7 +1,4 @@
-
-
-function generateHTML(team) {
-  let draftMarkdown = ` 
+ 
   
   <!DOCTYPE html>
 <html lang="en">
@@ -53,9 +50,48 @@ function generateHTML(team) {
   </h1>
   <body>
     <div class="allCards">
-${team.manager.generateHTMLCard(team.manager.getOfficeNumber())}
-${team.engineer.generateHTMLCard(team.engineer.getGithub())}
-${team.intern.generateHTMLCard(team.intern.getSchool())}
+
+    <div class="card">
+        <div class="top">
+            <div>adfafd</div>
+            <div>Manager</div>
+        </div>
+        <div class="bottom">
+            <ul>
+                <li>ID: adsfasdf</li>
+                <li>Email: asdfa</li>
+                <li>Office Number: undefined</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="top">
+            <div>aadfa</div>
+            <div>Engineer</div>
+        </div>
+        <div class="bottom">
+            <ul>
+                <li>ID: asdfa</li>
+                <li>Email: adfa</li>
+                <li>Github Account: adsfa</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="top">
+            <div>afdsdf</div>
+            <div>Intern</div>
+        </div>
+        <div class="bottom">
+            <ul>
+                <li>ID: asdfa</li>
+                <li>Email: asdf</li>
+                <li>Alma Mater: adsf</li>
+            </ul>
+        </div>
+    </div>
 
 
     </body>
@@ -64,9 +100,4 @@ ${team.intern.generateHTMLCard(team.intern.getSchool())}
 
 
   
-  `;
-
-  return draftMarkdown;
-}
-
-module.exports = generateHTML;
+  

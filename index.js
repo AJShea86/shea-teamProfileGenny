@@ -21,6 +21,8 @@ const testData = {
   internEmail: 'mac@intern.com',
   internSchool: 'University of Denver'
 }
+const team = {manager:null, engineer:null, intern:null}
+
 
 let userAnswers = {};
 let userAnswers2 = {};//ADDED USERANSWERS 2 HERE
@@ -129,6 +131,11 @@ inquirer
 
   .then((data) => {
     userAnswers = data
+    const manager = new Manager(data.managerName, data.managerID, data.managerEmail, data.officeNumber)
+    team.manager = manager
+
+
+
 console.log(userAnswers)
     let questions = [];
 
@@ -148,11 +155,27 @@ console.log(userAnswers)
     .prompt(questions)
     .then((data2) => {
 
+      if(data2.engineerName && data2.internName){
+        const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
+        team.engineer = engineer
+
+        const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
+        team.intern = intern
+
+      } else if (data2.engineerName){
+        const engineer = new Engineer(data2.engineerName,data2.engineerID,data2.engineerEmail,data2.engineerGithub)
+        team.engineer = engineer
+
+      } else if (data2.internName){
+        const intern = new Intern(data2.internName, data2.internID, data2.internEmail, data2.internSchool )
+        team.intern = intern
+      } else {
+  
+      }
+  
 
 
-      userAnswers = {...userAnswers, ...data2}
-      console.log(userAnswers)
-      const finalResult = generateHTML(userAnswers);
+      const finalResult = generateHTML(team);
 
       fs.writeFile("index.html", finalResult, (err) =>
         err ? console.error(err) : console.log("Success!")
@@ -168,7 +191,6 @@ console.log(userAnswers)
 
 
 
-
   ////need extra question to be the final question asked to the user
 // inquirer
 // .prompt(extraQuestion)
@@ -181,9 +203,9 @@ console.log(userAnswers)
 //     questions = [...internQuestions]
 
 //   } else {
-// then need a function to create as many employees as needed?
-// make the extraquestion a function itself?
-//
+// // then need a function to create as many employees as needed?
+// // make the extraquestion a function itself?
+
 //   }
 
 // })
