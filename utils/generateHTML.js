@@ -1,3 +1,4 @@
+const Engineer = require("../lib/Engineer");
 
 
 function generateHTML(team) {
@@ -47,6 +48,7 @@ function generateHTML(team) {
       height: 150px;
       display: flex;
       justify-content: center;
+      border-bottom: 5px solid blue;
     "
   >
     My Team
@@ -56,8 +58,16 @@ function generateHTML(team) {
 ${team.manager.generateHTMLCard(team.manager.getOfficeNumber())}
 ${team.engineer !== null ? team.engineer.generateHTMLCard(team.engineer.getGithub()): ""}
 ${team.intern !== null ? team.intern.generateHTMLCard(team.intern.getSchool()): ""}
-${team.extraMembers.map(member => member.generateHTMLCard("hello"))}
+${team.extraMembers.map(member => {  
+  if(member.getRole() === "Engineer"){
+  return member.generateHTMLCard(member.getGithub())
+  
 
+} else{
+  return member.generateHTMLCard(member.getSchool())
+
+}
+})}
     </body>
 </html>
 
