@@ -112,7 +112,7 @@ inquirer
 
   .then((data) => {
     userAnswers = data;
-    console.log(data);
+    // console.log(data);
     const manager = new Manager(
       data.managerName,
       data.managerID,
@@ -121,7 +121,7 @@ inquirer
     );
     team.manager = manager;
 
-    console.log(userAnswers);
+    // console.log(userAnswers);
     let questions = [];
 
     if (
@@ -179,7 +179,7 @@ inquirer
 function askExtra(extraQuestion) {
   let questions = [];
   inquirer.prompt(extraQuestion).then((extraAnswer) => {
-    console.log(extraAnswer);
+    // console.log(extraAnswer);
     if (
       extraAnswer.addMember.includes("Add Engineer") &&
       extraAnswer.addMember.includes("Add Intern")
@@ -196,7 +196,7 @@ function askExtra(extraQuestion) {
         err ? console.error(err) : console.log("Success!")
       );
     }
-    console.log(team);
+    // console.log(team);
 
     askTeamQuestion(questions);
   });
@@ -243,7 +243,7 @@ function askTeamQuestion(questions) {
 
       askExtra(extraQuestion);
     } else {
-      console.log(team);
+      // console.log(team);
       const finalResult = generateHTML(team);
 
       fs.writeFile("index.html", finalResult, (err) =>
