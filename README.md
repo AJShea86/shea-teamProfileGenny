@@ -2,3 +2,8 @@ This application is designed to help you quickly create a roster for a new team 
 
 
 ![team-screenshot](https://user-images.githubusercontent.com/97988155/157565505-4bc6705e-e56c-40d3-8bcb-09b8484833e9.png)
+
+
+https://youtu.be/i-Gkd41TRaw
+
+https://github.com/AJShea86/shea-teamProfileGenny
